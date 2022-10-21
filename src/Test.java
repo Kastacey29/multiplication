@@ -1,29 +1,31 @@
 import java.util.Objects;
 
 public class Test {
-    private final int a;
-    private final int b;
+    private final String example;
+    private final String example1;
 
     public Test() {
-        this.a = (int) (Math.random()*8+2);
-        this.b = (int) (Math.random()*8+2);
+        int a = (int) (Math.random()*8+2);
+        int b = (int) (Math.random()*8+2);
+        this.example=String.format("%d * %d",a,b);
+        this.example1=String.format("%d * %d",b,a);
     }
 
     public String getTest() {
-        return String.format("%d * %d",a,b);
+        return example;
 
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Test)) return false;
+        if (o==null||getClass()!=o.getClass()) return false;
         Test test = (Test) o;
-        return a == test.a && b == test.b;
+        return (example.equals(test.example)||example.equals(test.example1));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(a, b);
+        return example.hashCode()+example1.hashCode();
     }
 }
